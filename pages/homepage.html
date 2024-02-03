@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <title>Frozen Hackathon</title>
+    <script>
+        // Function to calculate the remaining time until the next hackathon
+        function calculateRemainingTime(nextHackathonDate) {
+            const now = new Date();
+            const remainingTime = new Date(nextHackathonDate) - now;
+
+            const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML =
+                days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+
+            // Update every 1 second
+            setTimeout(() => calculateRemainingTime(nextHackathonDate), 1000);
+        }
+
+        // Set the date and time of the next hackathon (replace with your actual date and time)
+        const nextHackathonDate = new Date('February 28, 2024 12:00:00').getTime();
+
+        // Initial call to start the countdown
+        calculateRemainingTime(nextHackathonDate);
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Frozen Hackathon</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pages/registration.html">Register</a></li>
+            <li><a href="pages/leaderboard.html">Leaderboard</a></li>
+            <li><a href="pages/announcements.html">Announcements</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section class="container">
+            <h2>Upcoming Hackathons</h2>
+            <h1>Welcome to the Weekly Hackathon!</h1>
+            <p>Explore exciting challenges and showcase your skills.</p>
+            
+            <!-- Dynamic Countdown Timer -->
+            <p>Next Hackathon starts in: <span id="countdown"></span></p>
+
+            <!-- Call to Action Buttons -->
+            <div class="btn-container">
+                <a href="pages/registration.html"><button>Register Now</button></a>
+                <a href="pages/leaderboard.html"><button>View Leaderboard</button></a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Frozen Hackathon. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <style>
+        /* Add the Countdown styles here */
+        body {
+            background-color: #f2f1ed;
+        }
+
+        .countdown {
+            width: 720px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .bloc-time {
+            text-align: center;
+            margin-right: 45px;
+        }
+
+        .count-title {
+            display: block;
+            margin-bottom: 15px;
+            font: normal 0.94em 'Lato';
+            color: #1a1a1a;
+            text-transform: uppercase;
+        }
+
+        .figure {
+            position: relative;
+            height: 110px;
+            width: 100px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .2), inset 2px 4px 0 0 rgba(255, 255, 255, .08);
+            margin-right: 10px;
+
+            > span {
+                position: absolute;
+                left: 0;
+                right: 0;
+                margin: auto;
+                font: normal 5.94em/107px 'Lato';
+                font-weight: 700;
+                color: #de4848;
+            }
+
+            .top,
+            .bottom-back {
+                &:after {
+                    content: "";
+                    position: absolute;
+                    z-index: -1;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 100%;
+                    border-bottom: 1px solid rgba(0, 0, 0, .1);
+                }
+            }
+
+            .top {
+                z-index: 3;
+                background-color: #f7f7f7;
+                transform-origin: 50% 100%;
+                -webkit-transform-origin: 50% 100%;
+                border-top-radius: 10px;
+                transform: perspective(200px);
+            }
+
+            .bottom {
+                z-index: 1;
+
+                &:before {
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 50%;
+                    background-color: rgba(0, 0, 0, .02);
+                }
+            }
+
+            .bottom-back {
+                z-index: 2;
+                top: 0;
+                height: 50%;
+                overflow: hidden;
+                background-color: #f7f7f7;
+                border-top-radius: 10px;
+
+                span {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                }
+            }
+
+            .top,
+            .top-back {
+                height: 50%;
+                overflow: hidden;
+                backface-visibility: hidden;
+            }
+
+            .top-back {
+                z-index: 4;
+                bottom: 0;
+                background-color: #fff;
+                -webkit-transform-origin: 50% 0;
+                transform-origin: 50% 0;
+                transform: perspective(200px) rotateX(180deg);
+                border-bottom-radius: 10px;
+
+                span {
+                    position: absolute;
+                    top: -100%;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                }
+            }
+        }
+    </style>
+    <title>Register for Frozen Hackathon</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var Countdown = {
+
+                $el: document.querySelector('.countdown'),
+
+                countdown_interval: null,
+                total_seconds: 0,
+
+                init: function () {
+                    this.$ = {
+                        days: this.$el.querySelector('.bloc-time.days .figure'),
+                        hours: this.$el.querySelector('.bloc-time.hours .figure'),
+                        minutes: this.$el.querySelector('.bloc-time.min .figure'),
+                        seconds: this.$el.querySelector('.bloc-time.sec .figure')
+                    };
+
+                    this.values = {
+                        days: this.$.days.parentElement.getAttribute('data-init-value'),
+                        hours: this.$.hours.parentElement.getAttribute('data-init-value'),
+                        minutes: this.$.minutes.parentElement.getAttribute('data-init-value'),
+                        seconds: this.$.seconds.parentElement.getAttribute('data-init-value'),
+                    };
+
+                    this.total_seconds = this.values.days * 24 * 60 * 60 + this.values.hours * 60 * 60 + this.values.minutes * 60 + this.values.seconds;
+
+                    this.count();
+                },
+
+                count: function () {
+                    var that = this,
+                        $days = this.$.days,
+                        $hours = this.$.hours,
+                        $min = this.$.minutes,
+                        $sec = this.$.seconds;
+
+                    this.countdown_interval = setInterval(function () {
+
+                        if (that.total_seconds > 0) {
+
+                            --that.values.seconds;
+
+                            if (that.values.minutes >= 0 && that.values.seconds < 0) {
+                                that.values.seconds = 59;
+                                --that.values.minutes;
+                            }
+
+                            if (that.values.hours >= 0 && that.values.minutes < 0) {
+                                that.values.minutes = 59;
+                                --that.values.hours;
+                            }
+
+                            if (that.values.days >= 0 && that.values.hours < 0) {
+                                that.values.hours = 23;
+                                --that.values.days;
+                            }
+
+                            that.checkHour(that.values.days, $days);
+                            that.checkHour(that.values.hours, $hours);
+                            that.checkHour(that.values.minutes, $min);
+                            that.checkHour(that.values.seconds, $sec);
+
+                            --that.total_seconds;
+                        } else {
+                            clearInterval(that.countdown_interval);
+                        }
+                    }, 1000);
+                },
+
+                animateFigure: function ($el, value) {
+                    var that = this,
+                        $top = $el.querySelector('.top'),
+                        $bottom = $el.querySelector('.bottom'),
+                        $back_top = $el.querySelector('.top-back'),
+                        $back_bottom = $el.querySelector('.bottom-back');
+
+                    $back_top.querySelector('span').innerHTML = value;
+                    $back_bottom.querySelector('span').innerHTML = value;
+
+                    TweenMax.to($top, 0.8, {
+                        rotationX: '-180deg',
+                        transformPerspective: 300,
+                        ease: Quart.easeOut,
+                        onComplete: function () {
+                            $top.innerHTML = value;
+                            $bottom.innerHTML = value;
+                            TweenMax.set($top, { rotationX: 0 });
+                        }
+                    });
+
+                    TweenMax.to($back_top, 0.8, {
+                        rotationX: 0,
+                        transformPerspective: 300,
+                        ease: Quart.easeOut,
+                        clearProps: 'all'
+                    });
+                },
+
+                checkHour: function (value, $el) {
+                    var val_1 = value.toString().charAt(0),
+                        val_2 = value.toString().charAt(1),
+                        fig_1_value = $el.querySelector('.top').innerHTML,
+                        fig_2_value = $el.querySelector('.bottom').innerHTML;
+
+                    if (value >= 10) {
+                        if (fig_1_value !== val_1) this.animateFigure($el, val_1);
+                        if (fig_2_value !== val_2) this.animateFigure($el, val_2);
+                    } else {
+                        if (fig_1_value !== '0') this.animateFigure($el, 0);
+                        if (fig_2_value !== val_1) this.animateFigure($el, val_1);
+                    }
+                }
+            };
+
+            Countdown.init();
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Frozen Hackathon</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="registration.html">Register</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="announcements.html">Announcements</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        <h2>Register for the Hackathon</h2>
+        <p>Join the Frozen Hackathon and showcase your skills! The registration deadline is in:</p>
+        <div class="countdown">
+            <div class="bloc-time days" data-init-value="3">
+                <span class="count-title">Days</span>
+                <div class="figure days">
+                    <span class="top">0</span>
+                    <span class="top-back">
+                        <span>0</span>
+                    </span>
+                    <span class="bottom">0</span>
+                    <span class="bottom-back">
+                        <span>0</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="bloc-time hours" data-init-value="23">
+                <span class="count-title">Hours</span>
+                <div class="figure hours">
+                    <span class="top">0</span>
+                    <span class="top-back">
+                        <span>0</span>
+                    </span>
+                    <span class="bottom">0</span>
+                    <span class="bottom-back">
+                        <span>0</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="bloc-time min" data-init-value="59">
+                <span class="count-title">Minutes</span>
+                <div class="figure min">
+                    <span class="top">0</span>
+                    <span class="top-back">
+                        <span>0</span>
+                    </span>
+                    <span class="bottom">0</span>
+                    <span class="bottom-back">
+                        <span>0</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="bloc-time sec" data-init-value="59">
+                <span class="count-title">Seconds</span>
+                <div class="figure sec">
+                    <span class="top">0</span>
+                    <span class="top-back">
+                        <span>0</span>
+                    </span>
+                    <span class="bottom">0</span>
+                    <span class="bottom-back">
+                        <span>0</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <p>Don't miss the opportunity! Click the button below to register:</p>
+        <div class="btn-container">
+            <a href="https://chat.whatsapp.com/Evh1owFvWVr0826c30p1FW" target="_blank"><button>Register Now</button></a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Frozen Hackathon. All Rights Reserved.</p>
+    </footer>
+    <script src="script.js"></script> <!-- Include your JavaScript file -->
+</body>
+</html>

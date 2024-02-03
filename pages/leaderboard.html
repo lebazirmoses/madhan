@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <title>Leaderboard - Frozen Hackathon</title>
+    <style>
+        /* Reset some default styles */
+        body, h1, h2, h3, p, ul, li, table, th, td {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #1c1c1c, #3d3d3d);
+            color: #fff;
+            animation: backgroundAnimation 20s linear infinite alternate; /* Added gradient animation */
+            margin: 0;
+        }
+
+        @keyframes backgroundAnimation {
+            from {
+                background-position: 0% 50%;
+            }
+            to {
+                background-position: 100% 50%;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #1c1c1c;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            background: linear-gradient(to right, #5e2b82, #b31217);
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            background-color: #fff;
+            color: #333;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background: linear-gradient(to right, #5e2b82, #b31217);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        /* ... (your existing styles) ... */
+
+        /* Updated Leaderboard Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #1c1c1c; /* Dark background color */
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #3d3d3d; /* Darker border color */
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background: linear-gradient(to right, #5e2b82, #b31217);
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        tbody tr:hover {
+            background: #3d3d3d; /* Darker background color on hover */
+        }
+
+        /* Action Button Style */
+        .action-button {
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .action-button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Frozen Hackathon</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="registration.html">Register</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="announcements.html">Announcements</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        <section>
+            <h2>Leaderboard</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Team Name</th>
+                        <th>Points</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Team A</td>
+                        <td>100</td>
+                        <td><button class="action-button" type="button">Update</button></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Team B</td>
+                        <td>90</td>
+                        <td><button class="action-button" type="button">Update</button></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Team C</td>
+                        <td>80</td>
+                        <td><button class="action-button" type="button">Update</button></td>
+                    </tr>
+                    <!-- Manually add more rows as needed -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Frozen Hackathon. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
