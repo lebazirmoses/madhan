@@ -12,7 +12,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #1c1c1c;
+            background-color: #292b2c;
             color: #fff;
         }
 
@@ -43,8 +43,7 @@
         }
 
         nav a:hover {
-            background-color: #fff;
-            color: #333;
+            background-color: #7e3d97;
         }
 
         main {
@@ -58,8 +57,9 @@
         }
 
         h1,
-        h2 {
-            color: #5e2b82;
+        h2,
+        h3 {
+            color: #7e3d97;
         }
 
         p {
@@ -79,23 +79,23 @@
         }
 
         .btn-container button {
-            background: linear-gradient(to right, #5e2b82, #b31217);
+            background: linear-gradient(to right, #7e3d97, #b31217);
             color: #fff;
             padding: 12px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
-            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out, color 0.3s ease-in-out;
         }
 
         .btn-container button:hover {
-            background-color: #fff;
+            background-color: #ffcc00;
             color: #333;
             transform: scale(1.05);
         }
 
         footer {
-            background: linear-gradient(to right, #5e2b82, #b31217);
+            background: linear-gradient(to right, #7e3d97, #b31217);
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -104,6 +104,65 @@
             width: 100%;
             font-size: 14px;
         }
+
+        .contest-details {
+            background-color: #363636;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .contest-details h2 {
+            color: #7e3d97;
+        }
+
+        .contest-details p {
+            line-height: 1.5;
+            color: #ddd;
+            font-size: 16px;
+        }
+
+        .requirements,
+        .judging-criteria {
+            margin-top: 15px;
+        }
+        .section-title {
+    color: #7e3d97;
+    margin-bottom: 10px;
+}
+
+.section-description {
+    color: #ddd;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.sub-title {
+    color: #7e3d97;
+    margin-bottom: 10px;
+}
+
+.details-section {
+    display: flex;
+    justify-content: space-between;
+}
+
+.requirements,
+.judging-criteria {
+    flex: 1;
+    padding: 15px;
+    background-color: #363636;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.contest-date {
+    color: #ddd;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
     </style>
 </head>
 
@@ -123,24 +182,62 @@
         <section class="container">
             <h2>Announcements</h2>
             <div class="announcement">
-                <h3>Important Update</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac enim non odio rhoncus elementum.</p>
-                <p class="announcement-date">Date: February 10, 2024</p>
-                <a href="#" class="btn-details">View Details</a>
+                <h3>Frozen Web Development Hackathon</h3>
+                <p>Welcome to the Frozen Hackathon Web Development Challenge! Put your coding skills to the test and build a creative and functional website using HTML, CSS, and JavaScript.</p>
+                <p>The contest begins on February 05, 2024. Stay tuned for more updates!</p>
+                <div class="btn-container">
+                    <button class="btn-details" onclick="toggleHackathonDetails()">View Details</button>
+                </div>
             </div>
-            <div class="announcement">
-                <h3>New Challenge Unveiled!</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ac enim non odio rhoncus elementum.</p>
-                <p class="announcement-date">Date: February 5, 2024</p>
-                <a href="#" class="btn-details">View Details</a>
+
+            <!-- Contest details section -->
+            <div id="hackathon-details" class="contest-details">
+                <h2 class="section-title">Web Development Hackathon</h2>
+                <p class="section-description">Welcome to the Frozen Hackathon Web Development Challenge! Put your coding skills to the test and build a creative and functional website using HTML, CSS, and JavaScript.</p>
+            
+                <div class="details-section">
+                    <div class="requirements">
+                        <h3 class="sub-title">Requirements:</h3>
+                        <ul>
+                            <li>Your website must have at least three pages (e.g., Home, About, Contact).</li>
+                            <li>Implement responsive design to ensure compatibility with various devices.</li>
+                            <li>Use CSS styling for an attractive and cohesive layout.</li>
+                            <li>Incorporate JavaScript for interactive features (e.g., form validation, image sliders).</li>
+                        </ul>
+                    </div>
+            
+                    <div class="judging-criteria">
+                        <h3 class="sub-title">Judging Criteria:</h3>
+                        <ul>
+                            <li>Functionality (30%) - How well does the website perform its intended functions?</li>
+                            <li>Design (30%) - Is the website visually appealing and well-designed?</li>
+                            <li>Code Quality (20%) - Evaluate the cleanliness and efficiency of the code.</li>
+                            <li>Creativity (20%) - Assess the originality and innovation in the design and features.</li>
+                        </ul>
+                    </div>
+                </div>
+            
+                <p class="contest-date">Ready to showcase your skills? The contest begins on February 05, 2024. Stay tuned for more updates!</p>
             </div>
-            <!-- Add more announcements as needed -->
+            
         </section>
     </main>
     <footer>
         <p>&copy; 2024 Frozen Hackathon. All Rights Reserved.</p>
     </footer>
-    <script src="script.js"></script> <!-- Include your JavaScript file -->
+    <script src="script.js"></script>
+    <script>
+        var hackathonDetails = document.getElementById("hackathon-details");
+        var btnDetails = document.querySelector(".btn-details");
+
+        btnDetails.addEventListener("click", function () {
+            toggleHackathonDetails();
+        });
+
+        function toggleHackathonDetails() {
+            hackathonDetails.style.display = (hackathonDetails.style.display === "none") ? "block" : "none";
+        }
+    </script>
 </body>
 
 </html>

@@ -38,10 +38,11 @@ nav ul {
     display: flex;
     justify-content: space-around;
     background: linear-gradient(to right, #5e2b82, #b31217);
-    padding: 10px;
+    padding: 15px; /* You can adjust the padding to change the height */
     margin-top: 10px;
     border-radius: 8px;
 }
+
 
 nav a {
     text-decoration: none;

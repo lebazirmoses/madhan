@@ -102,6 +102,12 @@
             width: 100%;
             font-size: 14px;
         }
+
+        .highlight-date {
+            text-decoration: underline;
+            color: #ffcc00; /* Yellow text color */
+            cursor: pointer;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>Frozen Hackathon</title>
@@ -122,8 +128,8 @@
         <section class="container">
             <h2>Welcome to the Premier Weekly Hackathon!</h2>
             <p>Embark on a journey of innovation and excellence as you participate in our cutting-edge hackathon challenges.</p>
-            <p>Stay tuned for the next thrilling Hackathon scheduled on [Date & Time], where you can showcase your prowess in problem-solving and creativity.</p>
-            <p>Secure your spot by registering before the deadline on [Registration Deadline]. Don't miss the chance to be part of this elite hacking community!</p>
+            <p>Stay tuned for the next thrilling Hackathon scheduled on <span class="highlight-date" onclick="location.href='pages/announcements.html'">10th February 2024</span>, where you can showcase your prowess in problem-solving and creativity.</p>
+            <p>Secure your spot by registering before the deadline on <span class="highlight-date" onclick="location.href='pages/announcements.html'">05th February 2024</span>. Don't miss the chance to be part of this elite hacking community!</p>
             
             <!-- Button Container with Links -->
             <div class="btn-container">
